@@ -1,0 +1,101 @@
+
+
+<form [formGroup]="formRegistro" class="d-flex justify-content-center centrar">
+  <div class="card flex justify-content-center">
+    <h1>REGISTRAR DE PAGO</h1>
+    <div class="row my-2">
+      <div class="col-md-4 col-lg-4 margenes">
+        <p-dropdown
+          [style]="{'width':'20rem'}"
+          id="Cliente"
+          class="izquierda margenes"
+          [options]="Clientes"
+          optionLabel="name"
+          [filter]="true"
+          (onChange)="onItemChanged()"
+          filterBy="name"
+          formControlName="Cliente"
+          placeholder="seleccione el cliente"
+        >
+          <ng-template pTemplate="selectedItem">
+              <div [style]="{'text-align':'left'}" *ngIf="formRegistro.get('Cliente')?.value">
+                  <div>{{ formRegistro.get('Cliente')?.value.name }}</div>
+              </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+              <div class="flex align-items-start" >
+                  <div>{{ country.name }}</div>
+              </div>
+          </ng-template>
+      </p-dropdown>
+      </div>
+
+    </div>
+  </div>
+
+
+
+<p-scroller [items]="products"   styleClass="border-1 surface-border centrar" [style]="{'width': '100%', 'height': '600px', 'margin': '0 auto', 'margin-top':'30px'}">
+
+  <ng-template pTemplate="item" let-item let-options="options" style="margin: 20px;border-style: solid;
+      border-width: 1px;
+      border-radius: 10px;
+      border-color: #ddd5d5;
+      padding: 10px;">
+    <div class="flex align-items-center p-2" [ngClass]="{ 'surface-ground': options.odd }" style="margin: 0 auto">
+      <div class="flex align-items-center" style="width: 100%; text-align: center;">
+        <div style="text-align: center; width: 100%;">
+          <b style="font-size: 10px;">FECHA ULTIMA FACTURA CON DEUDA: </b>
+          <p-tag severity="default">
+            <span class="text-base">
+              {{ item.periodo }}
+            </span>
+          </p-tag>
+        </div>
+      </div>
+
+      <div
+        class="flex align-items-center"
+        style="width: 100%;
+        margin-top: 20px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;">
+
+        <input
+          hidden
+          style="margin-right: 10px;"
+          pInputText
+          id="Deuda"
+          aria-describedby="username-help"
+          formControlName="Deuda"
+        />
+
+        <div class="input-container">
+
+          <p-badge [value]="item.deuda | currency:'USD':'symbol':'1.2-2'" class="badge" severity="warning"></p-badge>
+
+          <div class="flex-auto">
+            <p-inputNumber [style]="{ 'width': '70px !important' }" placeholder="valor" id="Valor" formControlName="Valor" inputId="minmaxfraction" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="5"></p-inputNumber>
+
+          </div>
+        </div>
+
+      </div>
+      <p-button
+          [style]="{ 'margin-top': '20px' }"
+          label="Pagar"
+          styleClass="p-button-success"
+          (click)="ActualizarPago(item)"
+        ></p-button>
+    </div>
+  </ng-template>
+</p-scroller>
+</form>
+
+<p-toast [style]="{ 'max-width': '300px' }"></p-toast>
+
+<p-confirmDialog [style]="{width: '90vw'}"></p-confirmDialog>
+
+
+

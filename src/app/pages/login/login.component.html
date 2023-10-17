@@ -1,0 +1,49 @@
+
+
+
+
+  <form [formGroup]="formLogin" style="margin: 0 auto; max-width: 500px;
+  margin-top: 100px;" class="d-flex justify-content-center centrar">
+    <div class="image-container">
+      <img class="rebote" src="https://wsreactbdxyz.000webhostapp.com/file_server/logo.png" style="height: 150px; margin: 0 auto;" alt="Logo de la empresa">
+    </div>
+    <div class="ui-g">
+      <div [style]="{'width':'100%'}" class="ui-g-12">
+        <div class="label-style">
+          <p style="margin-bottom: 10px;">Usuario</p>
+        </div>
+        <input
+          [style]="{'width':'100%'}"
+          id="userName"
+          type="text"
+          pInputText
+          placeholder="Ingrese su usuario"
+          formControlName="userName"
+        />
+      </div>
+      <div [style]="{'width':'100%'}" class="ui-g-12">
+        <div class="label-style">
+          <p style="margin-bottom: 10px;">Contraseña</p>
+        </div>
+        <p-password
+          [style]="{'width':'100%'}"
+          id="userPassword"
+          placeholder="Ingrese su contraseña"
+          formControlName="userPassword"
+        ></p-password>
+      </div>
+      <div class="ui-g-12">
+        <button
+          pButton
+          pRipple
+          [style]="{'width':'100%','margin-top':'10px'}"
+          styleClass="p-button-raised"
+          (click)="verificarContrasena()"
+          label="Entrar"
+        ></button>
+      </div>
+    </div>
+  </form>
+
+  <p-toast [style]="{ 'max-width': '300px' }"></p-toast>
+

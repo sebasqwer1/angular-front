@@ -1,0 +1,150 @@
+
+
+
+
+<form *ngIf="isAuthenticated" [formGroup]="formRegistro" class="d-flex justify-content-center centrar">
+  <div class="card flex justify-content-center">
+    <h1>REGISTRO DE COBRO</h1>
+    <div class="row my-2">
+
+      <div class="col-md-4 col-lg-4 margenes">
+        <p-calendar
+          [style]="{'width':'20rem'}"
+          id="Fecha"
+          formControlName="Fecha"
+          [showIcon]="true"
+          placeholder="seleccione la fecha"
+          view="month"
+          dateFormat="mm/yy"
+          [readonlyInput]="true"
+        ></p-calendar>
+      </div>
+
+      <div class="col-md-4 col-lg-4 margenes">
+        <p-dropdown
+          [style]="{'width':'20rem'}"
+          id="Cliente"
+          class="izquierda margenes"
+          [options]="Clientes"
+          optionLabel="name"
+          [filter]="true"
+          (onChange)="onItemChanged()"
+          filterBy="name"
+          formControlName="Cliente"
+          placeholder="seleccione el cliente"
+        >
+          <ng-template pTemplate="selectedItem">
+              <div [style]="{'text-align':'left'}" *ngIf="formRegistro.get('Cliente')?.value">
+                  <div>{{ formRegistro.get('Cliente')?.value.name }}</div>
+              </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+              <div class="flex align-items-start" >
+                  <div>{{ country.name }}</div>
+              </div>
+          </ng-template>
+      </p-dropdown>
+      </div>
+
+      <div class="col-md-4 col-lg-4 margenes">
+
+        <div class="label-style color-style">
+          <label >CONSUMO ANTERIOR</label>
+        </div>
+
+        <div class="p-inputgroup margen ancho" >
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-clock"></i>
+          </span>
+          <input
+            id="ConsumoAnterior"
+            type="text"
+            [style]="{'width':'20rem'}"
+            pInputText
+            readonly
+            placeholder="ultimo consumo"
+            inputmode="numeric"
+            formControlName="ConsumoAnterior"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-4 margenes">
+
+        <div class="label-style color-style">
+          <label >DEUDA PENDIENTE</label>
+        </div>
+
+        <div class="p-inputgroup margen ancho" >
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-money-bill"></i>
+          </span>
+
+          <p-inputNumber id="Deuda" placeholder="deuda pendiente" formControlName="Deuda" inputId="minmaxfraction" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="5"> </p-inputNumber>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-4 margenes">
+
+        <div class="label-style">
+          <label >CONSUMO ACTUAL</label>
+        </div>
+
+        <div class="p-inputgroup margen ancho" >
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-clock"></i>
+          </span>
+          <input
+            id="Consumo"
+            type="text"
+            [style]="{'width':'20rem'}"
+            pInputText
+            placeholder="consumo actual"
+            inputmode="numeric"
+            formControlName="Consumo"
+            (input)="onConsumoInputChange($event)"
+          />
+        </div>
+      </div>
+
+
+
+      <div class="col-md-4 col-lg-4 margenes">
+
+        <div class="label-style">
+          <label >VALOR A PAGAR</label>
+        </div>
+
+        <div class="p-inputgroup margen ancho" >
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-dollar"></i>
+          </span>
+          <p-inputNumber
+            placeholder="valor"
+            id="Valor"
+            formControlName="Valor"
+            inputId="minmaxfraction"
+            mode="decimal"
+            [minFractionDigits]="2"
+            [maxFractionDigits]="5">
+          </p-inputNumber>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-4 margenes">
+        <button
+          pButton
+          pRipple
+          [style]="{'width':'20rem'}"
+          styleClass="p-button-raised"
+          (click)="GuardarDatos()"
+          label="Guardar"
+        ></button>
+      </div>
+
+    </div>
+  </div>
+</form>
+<p-toast [style]="{ 'max-width': '300px' }"></p-toast>
+
+

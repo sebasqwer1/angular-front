@@ -1,0 +1,23 @@
+/* tu-componente.component.css */
+.image-container {
+  display: flex;
+}
+
+.rebote {
+  animation: rebote 2s infinite; /* Duración de la animación y repetición infinita */
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@keyframes rebote {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0); /* Estado inicial y final (sin rebote) */
+  }
+  40% {
+    transform: translateY(-20px); /* Punto más alto del rebote */
+  }
+  60% {
+    transform: translateY(-10px); /* Punto medio del rebote */
+  }
+}

@@ -1,0 +1,205 @@
+
+
+<form *ngIf="estadoVisual" [formGroup]="formFacturacion" class="d-flex justify-content-center centrar">
+  <div class="card flex justify-content-center">
+    <h1>GENERAR FACTURAS</h1>
+    <div class="row my-2">
+      <div class="col-md-4 col-lg-4 margenes">
+        <p-calendar
+          [style]="{'width':'20rem'}"
+          id="Fecha"
+          formControlName="Fecha"
+          [showIcon]="true"
+          placeholder="seleccione la fecha"
+          view="month"
+          dateFormat="mm/yy"
+          [readonlyInput]="true"
+        ></p-calendar>
+      </div>
+      <div class="col-md-4 col-lg-4 margenes">
+        <button
+          pButton
+          pRipple
+          [style]="{'width':'20rem'}"
+          styleClass="p-button-raised"
+          (click)="Generar()"
+          label="Generar"
+        ></button>
+      </div>
+      <div *ngIf="Clientes && Clientes.length > 0" class="col-md-4 col-lg-4 margenes">
+        <button
+          pButton
+          pRipple
+          [style]="{'width':'20rem'}"
+          styleClass="p-button-raised"
+          (click)="imprimirPDF()"
+          label="Imprimir"
+        ></button>
+      </div>
+
+
+    </div>
+  </div>
+</form>
+
+
+<div *ngIf="Clientes && Clientes.length > 0" #reciboContent class="recibo" style="max-width: 100%;">
+  <div  [style.width]="screenWidth <= 550 ? '100%' : '49%'" style="display: inline-block; margin-right: 5px;"  *ngFor="let cliente of Clientes ; let i = index">
+  <div class="logo" style="border: 1px dashed #6a6a6a; padding: 15px; flex: 1; margin-top: 10px;" [class.page-break]="i % 4 === 0">
+
+    <div style="display: flex;">
+
+      <div>
+        <img src="https://wsreactbdxyz.000webhostapp.com/file_server/logo.png" style="height: 40px;" alt="Logo de la empresa">
+      </div>
+
+      <div style="flex: 5;">
+        <div>
+          <label style="font-weight: bold; font-size: 8px;">JUNTA ADMINISTRADORA DE AGUA POTABLE "RECINTO MARIA ESTHER"</label>
+        </div>
+        <div>
+          <label style="font-size: 6px;">EL EMPALME - GUAYAS - ECUADOR</label>
+        </div>
+      </div>
+
+      <div style="flex: 1;">
+        <div>
+          <label style="font-weight: bold;font-size: 6px;">PLANILLA DE COBRO DE CONSUMO</label>
+        </div>
+        <div style="border-style: solid;
+            border-width: 2px;
+            border-radius: 5px;
+            border-color: red;
+            display: flex;
+            padding: 3px;
+            justify-content: center;">
+          <label style="color: red;font-size: 10px;
+            ">{{cliente.numeroFactura.padStart(10, '0')}}
+          </label>
+        </div>
+
+      </div>
+
+  </div>
+  <div>
+    <div style="text-align: left;">
+
+      <div style="display: flex; margin-bottom: 10px;">
+          <div style="flex: 5;">
+            <div style="display: flex">
+              <div>
+                <strong style="font-size: 10px;">Corresponde al mes de : </strong>
+              </div>
+              <div style="flex: 7;border-bottom-style: solid;
+                          border-width: 1px;">
+                <label style="font-size: 10px; text-transform: uppercase;">&nbsp;{{ cliente.periodo | date:'MMMM' }}
+                </label>
+              </div>
+
+            </div>
+          </div>
+          <div style="flex: 1;">
+            <div style="display: flex">
+              <div style="flex: 2">
+                <strong style="font-size: 10px;">del : </strong>
+              </div>
+              <div style="flex: 1;border-bottom-style: solid;
+                          border-width: 1px;">
+                <label style="font-size: 10px;">&nbsp;{{ cliente.periodo | date:'y' }}
+                </label>
+              </div>
+
+            </div>
+          </div>
+      </div>
+
+      <div style="border-style: solid;
+      border-width: 1px;">
+        <p class="marca-agua" *ngIf="cliente.ordenCorte">ORDEN DE CORTE</p>
+        <div style="display: flex; border-bottom-style: solid;
+        border-width: 1px;">
+          <div style="flex: 1;">
+            <p><strong style="font-size: 10px; padding-left: 2px;">Fecha de Emisión: </strong></p>
+            <p class="contenido">{{ getCurrentDate() | date: 'dd-MM-yyyy' }}</p>
+          </div>
+          <div style="flex: 1;border-left-style: solid;
+          border-width: 1px;">
+            <p><strong style="font-size: 10px;">Medidor/Linea: </strong></p>
+            <p class="contenido">{{cliente.medidor}}</p>
+          </div>
+        </div>
+
+        <div style="border-bottom-style: solid;
+        border-width: 1px;">
+          <p><strong style="font-size: 10px; padding-left: 2px;">Nombre del Usuario: </strong></p>
+          <p class="contenido">{{cliente.nombre}}</p>
+        </div>
+
+        <div style="display: flex; border-bottom-style: solid;
+        border-width: 1px;">
+          <div style="flex: 1;">
+            <p><strong style="font-size: 10px; padding-left: 2px;">Lectura Anterior: </strong></p>
+            <p class="contenido">{{cliente.consumo_anterior}}</p>
+          </div>
+          <div style="flex: 1;border-left-style: solid;
+          border-width: 1px;">
+            <p><strong style="font-size: 10px; padding-left: 2px;">Deuda Anterior: </strong></p>
+            <p class="contenido">{{cliente.deuda | currency:'USD':true:'1.2-2'}}</p>
+          </div>
+        </div>
+
+        <div style="display: flex;border-bottom-style: solid;
+        border-width: 1px;">
+          <div style="flex: 1;">
+            <p><strong style="font-size: 10px; padding-left: 2px;">Lectura Actual: </strong></p>
+            <p class="contenido">{{cliente.consumo}}</p>
+          </div>
+          <div style="flex: 1;border-left-style: solid;
+          border-width: 1px;">
+            <p><strong style="font-size: 10px; padding-left: 2px;">Deuda Actual: </strong></p>
+            <p class="contenido">{{cliente.valor - cliente.deuda | currency:'USD':true:'1.2-2'}}</p>
+          </div>
+        </div>
+
+        <div style="display: flex;border-bottom-style: solid;
+        border-width: 1px;">
+          <div style="flex: 1;">
+            <p><strong style="font-size: 10px; padding-left: 2px;">Consumo M3: </strong></p>
+            <p class="contenido">{{cliente.consumo - cliente.consumo_anterior}}</p>
+          </div>
+          <div style="flex: 1;border-left-style: solid;
+          border-width: 1px;">
+            <p><strong style="font-size: 10px; padding-left: 2px;">Exedente M3: </strong></p>
+            <p class="contenido"></p>
+          </div>
+        </div>
+
+        <div style="display: flex;">
+          <div style="flex: 1;">
+            <p><strong style="font-size: 10px; padding-left: 2px;">Cancelar antes de: </strong></p>
+            <p class="contenido"></p>
+          </div>
+          <div style="flex: 1;border-left-style: solid;
+          border-width: 1px;">
+            <p><strong style="font-size: 10px; padding-left: 2px;">Total a Pagar: </strong></p>
+            <p class="contenido">{{cliente.valor | currency:'USD':true:'1.2-2'}}</p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: right;
+      font-size: 9px;
+      font-weight: bold;">
+        <label style="font-size: 6px;">EVITE EL CORTE DE SU SERVICIO, EL SISTEMA DE AGUA POTABLE ES SU VIVA</label>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+</div>
+
+
+<p-toast></p-toast>
+
+

@@ -1,0 +1,34 @@
+.centrar{
+  text-align: center;
+}
+
+.margen{
+  margin: 0 auto;
+}
+
+.ancho{
+  width: 20rem;
+}
+
+
+.izquierda{
+  text-align: center;
+}
+
+.margenes{
+  margin-top: 10px;
+}
+
+
+.label-style{
+  margin: 0 auto;
+  width: 20rem;
+  text-align: left;
+  padding-bottom: 10px;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.color-style{
+  color: red;
+}

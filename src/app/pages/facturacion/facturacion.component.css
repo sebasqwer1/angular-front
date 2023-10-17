@@ -1,0 +1,129 @@
+.centrar{
+  text-align: center;
+}
+
+p{
+  margin: 0 !important;
+}
+
+.margen{
+  margin: 0 auto;
+}
+
+.ancho{
+  width: 20rem;
+}
+
+
+.izquierda{
+  text-align: center;
+}
+
+.margenes{
+  margin-top: 10px;
+}
+
+
+.label-style{
+  margin: 0 auto;
+  width: 20rem;
+  text-align: left;
+  padding-bottom: 10px;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.color-style{
+  color: red;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.recibo {
+  /* border: 1px solid #ccc; */
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  /* margin-top: 20px; */
+
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  max-width: 100px;
+  height: auto;
+}
+
+.info {
+  margin-bottom: 20px;
+}
+
+.info p {
+  margin: 5px 0;
+}
+
+.total {
+  text-align: right;
+  margin-top: 20px;
+}
+
+p{
+  margin-top: 0px;
+  margin-bottom: 6px;
+}
+
+.contenido{
+  text-align: center;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+strong{
+  font-size: 12px;
+}
+
+@media print {
+  @page {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+}
+
+/* Estilo para el contenedor de columnas */
+.columns {
+  display: flex;
+  flex-wrap: wrap; /* Envolver elementos cuando no quepan en el ancho */
+  justify-content: space-between; /* Espacio uniforme entre las columnas */
+}
+
+/* Estilo para cada columna */
+.column {
+  flex: 0 0 calc(50% - 10px); /* Ancho del 50% (menos un pequeño espacio entre columnas) */
+  margin-bottom: 20px; /* Espacio entre filas (clientes) */
+  border: 1px solid #ccc; /* Borde opcional */
+  padding: 15px; /* Espacio interno */
+  box-sizing: border-box; /* Incluye el espacio del borde en el ancho */
+}
+
+.marca-agua{
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 25px;
+  position: relative;
+  transform: translateY(50px) rotate(45deg);
+  font-weight: bold;
+  text-align: center;
+  max-height: 0px;
+}
+

@@ -1,0 +1,30 @@
+
+
+
+<div *ngIf="obtenerParametro()">
+  <i  (click)="toggleNavbar()" class="pi pi-th-large mr-4 p-text-secondary" [style]="{'margin-top':'15px', 'cursor':'pointer'}" pBadge style="font-size: 2rem" value="3"></i>
+
+  <div class="content" role="main" *ngIf="showButtons">
+
+    <div class="card-container">
+      <div class="card" target="_blank" rel="noopener" (click)="RegistrarCobros()">
+        <span>Registrar Cobro</span>
+        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </div>
+
+      <div class="card" target="_blank" rel="noopener" (click)="Regularizar()">
+        <span>Registrar Pago</span>
+        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </div>
+
+      <div class="card" target="_blank" rel="noopener" (click)="GenerarFacturas()">
+        <span>Generar Facturas</span>
+        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!-- <app-popup></app-popup> -->
+<router-outlet></router-outlet>

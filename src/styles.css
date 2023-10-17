@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]{ display: none; }
+
+body {
+  font-family: 'Ubuntu';
+}
+
+.negrita-label-form {
+  font-weight: bold;
+}
+
+.p-calendar.p-calendar-w-btn .p-datepicker-trigger {
+  background-color: #e9ecef !important;
+  border-left: 1px solid #ced4da !important;
+  border-top: 1px solid #ced4da !important;
+  border-right: 1px solid #ced4da !important;
+  border-bottom: 1px solid #ced4da !important;
+  color: #6c757d;
+}
+
+.p-dropdown-label {
+  text-align: left !important;
+}
+
+
+@media print {
+  .page-break {
+    page-break-before: always;
+  }
+}
+
+
+.p-password-input{
+  width: 100% !important;
+}
+
+/* Media query para pantallas menores a 300px */
+@media screen and (max-width: 300px) {
+  #factura {
+    width: 100%; /* Establecer el ancho al 100% en pantallas pequeñas */
+  }
+}
+
